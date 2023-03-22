@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react'
+import {auth,provider,google} from './firebase'
+import { signInWithPopup} from 'firebase/auth'
 
 function App() {
+  const handleLogin=()=>{
+    signInWithPopup(auth,provider).then((result)=>{
+      console.log(result);
+    }).catch((err)=>{
+        console.log(err);
+    })
+
+  }
+  const handle=()=>{
+    signInWithPopup(auth,google).then((result)=>{
+      console.log(result);
+    }).catch((err)=>{
+      console.log(err);
+  })
+  }
+  const [user,setUser]=useState(null)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={handleLogin}>Login</button>
+      <button onClick={handle}>Lon</button>
     </div>
   );
 }
